@@ -27,24 +27,15 @@ Request → Middleware (Tracing, Validation, Logging) → Controller → Service
 - **Logging:** Pino (structured JSON)
 - **API Docs:** Swagger/OpenAPI via swagger-jsdoc
 - **Testing:** Jest + ts-jest
-- **Containerization:** Docker + Docker Compose
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js ≥ 18
-- PostgreSQL 16 (or Docker)
+- PostgreSQL (Neon cloud or any PostgreSQL instance)
 
-### Option 1: Docker (Recommended)
-
-```bash
-docker-compose up -d
-```
-
-The service will be available at `http://localhost:3000`.
-
-### Option 2: Local Development
+### Setup
 
 1. **Install dependencies**
    ```bash
@@ -59,7 +50,7 @@ The service will be available at `http://localhost:3000`.
 
 3. **Setup database**
    ```bash
-   npx prisma migrate dev
+   npx prisma migrate deploy
    ```
 
 4. **Start development server**
@@ -149,8 +140,7 @@ src/
 │       ├── contact.service.ts
 │       ├── contact.repository.ts
 │       ├── contact.routes.ts
-│       ├── contact.schema.ts
-│       └── contact.types.ts
+│       └── contact.schema.ts
 ├── common/
 │   ├── errors/          # Custom error classes
 │   ├── logger/          # Pino structured logger
@@ -204,7 +194,6 @@ feat: add request tracing middleware
 feat: add graceful shutdown handling
 docs: add Swagger/OpenAPI documentation
 test: add unit tests for contact service
-chore: dockerize application
 docs: add README and Postman collection
 ```
 
@@ -214,7 +203,7 @@ docs: add README and Postman collection
 - **Graceful shutdown:** Handles SIGTERM/SIGINT, drains connections before exit
 - **Structured logging:** JSON logs via Pino for easy parsing by log aggregators
 - **Security:** Helmet headers, CORS, input validation and sanitization
-- **Health checks:** Docker HEALTHCHECK + `/health` endpoint for load balancer integration
+- **Health checks:** `/health` endpoint for load balancer integration
 - **Connection pooling:** Prisma manages PostgreSQL connection pooling
 - **Soft deletes:** `deletedAt` column for audit trail without data loss
 

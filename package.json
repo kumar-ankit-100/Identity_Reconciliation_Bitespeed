@@ -14,9 +14,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:migrate:prod": "prisma migrate deploy",
-    "prisma:studio": "prisma studio",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down"
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
