@@ -8,7 +8,7 @@ import { prisma } from '../../config/database';
 
 const contactRepository = new ContactRepository(prisma);
 const contactService = new ContactService(contactRepository);
-const contactController = new ContactController(contactService);
+const contactController = new ContactController(contactService, contactRepository);
 
 const router = Router();
 
@@ -100,5 +100,58 @@ const router = Router();
  *                       example: "At least one of email or phoneNumber must be provided"
  */
 router.post('/identify', validate(identifySchema), contactController.identify);
+
+/**
+ * @openapi
+ * /contacts:
+ *   get:
+ *     summary: Get all contacts
+ *     description: Returns a JSON array of all contact records stored in the database.
+ *     tags:
+ *       - Contact
+ *     responses:
+ *       200:
+ *         description: List of all contacts
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 contacts:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         example: 1
+ *                       phoneNumber:
+ *                         type: string
+ *                         nullable: true
+ *                         example: "123456"
+ *                       email:
+ *                         type: string
+ *                         nullable: true
+ *                         example: "mcfly@hillvalley.edu"
+ *                       linkedId:
+ *                         type: integer
+ *                         nullable: true
+ *                         example: null
+ *                       linkPrecedence:
+ *                         type: string
+ *                         enum: [primary, secondary]
+ *                         example: "primary"
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                       deletedAt:
+ *                         type: string
+ *                         format: date-time
+ *                         nullable: true
+ */
+router.get('/contacts', contactController.getAllContacts);
 
 export { router as contactRoutes };

@@ -40,6 +40,13 @@ export class ContactRepository {
     return this.db.contact.create({ data });
   }
 
+  async findAll(): Promise<Contact[]> {
+    return this.db.contact.findMany({
+      where: { deletedAt: null },
+      orderBy: { createdAt: 'asc' },
+    });
+  }
+
   async demoteToPrimary(
     contactId: number,
     newPrimaryId: number,
