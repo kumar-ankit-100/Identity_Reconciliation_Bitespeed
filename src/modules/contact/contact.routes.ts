@@ -103,7 +103,7 @@ router.post('/identify', validate(identifySchema), contactController.identify);
 
 /**
  * @openapi
- * /contacts:
+ * /identity:
  *   get:
  *     summary: Get all contacts
  *     description: Returns a JSON array of all contact records stored in the database.
@@ -152,6 +152,6 @@ router.post('/identify', validate(identifySchema), contactController.identify);
  *                         format: date-time
  *                         nullable: true
  */
-router.get('/contacts', contactController.getAllContacts);
+router.get('/identity', contactController.getAllContacts);
 
 export { router as contactRoutes };
