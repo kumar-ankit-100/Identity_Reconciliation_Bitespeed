@@ -1,0 +1,126 @@
+{
+  "info": {
+    "name": "Bitespeed Identity Reconciliation",
+    "description": "API collection for testing the Identity Reconciliation service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/health",
+        "header": []
+      }
+    },
+    {
+      "name": "Identify - New Contact (both fields)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/identify",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"lorraine@hillvalley.edu\",\n  \"phoneNumber\": \"123456\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Identify - Link with same phone, new email",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/identify",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"mcfly@hillvalley.edu\",\n  \"phoneNumber\": \"123456\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Identify - Email only",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/identify",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"lorraine@hillvalley.edu\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Identify - Phone only",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/identify",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"phoneNumber\": \"123456\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Identify - Merge two primaries",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/identify",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"george@hillvalley.edu\",\n  \"phoneNumber\": \"717171\"\n}"
+        },
+        "description": "Run after creating two separate primaries: george@hillvalley.edu/919191 and biffsucks@hillvalley.edu/717171"
+      }
+    },
+    {
+      "name": "Identify - Validation Error (empty body)",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/identify",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        }
+      }
+    }
+  ]
+}
