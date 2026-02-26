@@ -177,25 +177,7 @@ CREATE INDEX idx_contact_phone_number ON contacts(phone_number);
 CREATE INDEX idx_contact_linked_id ON contacts(linked_id);
 ```
 
-## Commit History Plan
 
-```
-chore: initialize project with TypeScript and ESLint
-chore: setup Prisma ORM and database schema
-feat: add database migrations and indexing
-feat: implement contact repository layer
-feat: implement identity reconciliation service
-feat: add input validation with Zod
-feat: implement controller and routes
-feat: add centralized error handling
-feat: integrate structured logging with Pino
-feat: add health check endpoint
-feat: add request tracing middleware
-feat: add graceful shutdown handling
-docs: add Swagger/OpenAPI documentation
-test: add unit tests for contact service
-docs: add README and Postman collection
-```
 
 ## Production Considerations
 
